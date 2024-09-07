@@ -8,6 +8,9 @@ with open("README.md", "r") as fh:
 setup(
     name="pydeye",
     version="0.0.1",
+    description="Python deye inverter interface",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Jakob Salmič",
     author_email="salmic.jakob@gmail.com",
     maintainer=", ".join(("Jakob Salmič <salmic.jakob@gmail.com>",)),

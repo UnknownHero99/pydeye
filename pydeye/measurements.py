@@ -38,7 +38,7 @@ class PhaseMeasurements:
 class ACMeasurements:
     total_power: Measurement
     phases: list[PhaseMeasurements]
-    fequency: Measurement
+    frequency: Measurement
 
 @dataclass
 class PVStringMeasurements:

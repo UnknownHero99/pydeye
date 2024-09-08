@@ -258,7 +258,7 @@ class DeyeSUN12KEU(BaseInverter):
                     power=grid_L3_external_power if self.external_ct else grid_L3_internal_power
                 )
             ],
-            fequency=grid_frequency
+            frequency=grid_frequency
         )
 
         load_measurements = ACMeasurements(
@@ -277,7 +277,7 @@ class DeyeSUN12KEU(BaseInverter):
                     power=load_L3_power
                 )
             ],
-            fequency=load_frequency
+            frequency=load_frequency
         )
 
         total_measurements = EnergyMeasurements(

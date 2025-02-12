@@ -33,7 +33,7 @@ class ModbusTCP():
         return result
     
     async def get_basic_info(self) -> BasicInfo:
-        data = await self.read_registers(0, 20)
+        data = await self.read_registers(0, 24)
         mapper = ModbusMapper(data, 0)
         mapper.dump()
 

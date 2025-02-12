@@ -19,8 +19,8 @@ class DeyeSUN12KEU(BaseInverter):
 
     async def get_measurements(self):
         print("Getting measurements")
-        data = await self.adapter.read_registers(514, 126)
-        data2 = await self.adapter.read_registers(514+126, 126)
+        data = await self.adapter.read_registers(514, 125)
+        data2 = await self.adapter.read_registers(514+125, 125)
 
         mapper = ModbusMapper(data+data2, 514)
 

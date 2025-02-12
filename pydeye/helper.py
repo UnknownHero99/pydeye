@@ -3,12 +3,12 @@ import struct
 
 class InverterType(Enum):
     UNDEFINED = (0, "Undefined")
-    SINGLE_PHASE_HYBRID_INVERTER = (2, "Single phase hybrid inverter")
-    MICRO_INVERTER = (3, "Micro inverter")
-    LOW_VOLTAGE_THREE_PHASE_HYBRID_INVERTER = (4, "Low voltage three phase hybrid inverter")
-    HIGH_VOLTAGE_THREE_PHASE_HYBRID_INVERTER = (5, "High voltage three phase hybrid inverter")
-    HIGH_VOLTAGE_THREE_PHASE_INVERTER_6_12KW = (6, "High voltage three phase inverter 6-12kW")
-    HIGH_VOLTAGE_THREE_PHASE_INVERTER_20_50WK = (7, "High voltage three phase inverter 20-50kW")
+    SINGLE_PHASE_HYBRID_INVERTER = (3, "Single phase hybrid inverter")
+    MICRO_INVERTER = (4, "Micro inverter")
+    LOW_VOLTAGE_THREE_PHASE_HYBRID_INVERTER = (5, "Low voltage three phase hybrid inverter")
+    HIGH_VOLTAGE_THREE_PHASE_HYBRID_INVERTER = (6, "High voltage three phase hybrid inverter")
+    HIGH_VOLTAGE_THREE_PHASE_INVERTER_6_12KW = (7, "High voltage three phase inverter 6-12kW")
+    HIGH_VOLTAGE_THREE_PHASE_INVERTER_20_50WK = (262, "High voltage three phase inverter 20-50kW")
     THREE_PHASE_POWER_CONVERSION_SYSTEM = (8, "Three phase power conversion system")
     BALCONY_ENERGY_STORAGE_SYSTEM = (9, "Balcony energy storage system")
 

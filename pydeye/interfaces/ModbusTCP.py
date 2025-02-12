@@ -22,18 +22,18 @@ class ModbusTCP():
         print(self.connected())
 
         print(f"Reading {count} registers at address {register_address}")
-        result = await self.client.read_holding_registers(register_address, count, slave=self.unit)
+        result = await self.client.read_holding_registers(register_address, count=count, slave=self.unit)
         return result.registers
 
     async def write_registers(self, register_address, values):
         if not self.connected():
             await self.connect()
 
-        result = await self.client.write_registers(register_address, values, slave=self.unit)
+        result = await self.client.write_registers(register_address, values=values, slave=self.unit)
         return result
     
     async def get_basic_info(self) -> BasicInfo:
-        data = await self.read_registers(0, 126)
+        data = await self.read_registers(0, 20)
         mapper = ModbusMapper(data, 0)
         mapper.dump()
 

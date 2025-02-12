@@ -23,6 +23,7 @@ class DeyeSUN12KEU(BaseInverter):
         data2 = await self.adapter.read_registers(514+125, 125)
 
         mapper = ModbusMapper(data+data2, 514)
+        mapper.dump()
 
         # 514 daily battery charge uint16 0.1 scale 
         daily_battery_charge_value = round(mapper.get_uint16(514) * 0.1, 1)
@@ -151,15 +152,15 @@ class DeyeSUN12KEU(BaseInverter):
         grid_total_power = Measurement(value=grid_total_power_value, unit="W")
 
         # 630 grid L1 current uint16 0.01 scale
-        grid_L1_current_value = round(mapper.get_int16(630) * 0.01, 2)
+        grid_L1_current_value = round(mapper.get_int16(610) * 0.01, 2)
         grid_L1_current = Measurement(value=grid_L1_current_value, unit="A")
 
         # 631 grid L2 current uint16 0.01 scale
-        grid_L2_current_value = round(mapper.get_int16(631) * 0.01, 2)
+        grid_L2_current_value = round(mapper.get_int16(611) * 0.01, 2)
         grid_L2_current = Measurement(value=grid_L2_current_value, unit="A")
 
         # 632 grid L3 current uint16 0.01 scale
-        grid_L3_current_value = round(mapper.get_int16(632) * 0.01, 2)
+        grid_L3_current_value = round(mapper.get_int16(612) * 0.01, 2)
         grid_L3_current = Measurement(value=grid_L3_current_value, unit="A")
 
         # 633 inverter L1 power uint16

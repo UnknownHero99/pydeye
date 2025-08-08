@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 
 [tool.poetry]
 name = "pydeye"
-version = "0.0.7"
+version = "0.0.8"
 description = "A Python library for interacting with Deye Inverters using ModbusTCP"
 authors = ["Jakob Salmič <salmic.jakob@gmail.com>"]
 license = "GPL"
@@ -22,6 +22,6 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pymodbus = "*"
+pymodbus = "3.9.2"
 
 [tool.poetry.dev-dependencies]

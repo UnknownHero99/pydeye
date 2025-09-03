@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "pydeye"
-version = "0.0.9"
+version = "0.0.10"
 description = "A Python library for interacting with Deye Inverters using ModbusTCP"
 authors = ["Jakob Salmič <salmic.jakob@gmail.com>"]
 license = "GPL"
@@ -23,6 +23,6 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pymodbus = "3.9.2"
+pymodbus = "3.11.1"
 
 [tool.poetry.dev-dependencies]

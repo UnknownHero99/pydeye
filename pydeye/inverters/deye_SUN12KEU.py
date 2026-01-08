@@ -18,7 +18,6 @@ class DeyeSUN12KEU(BaseInverter):
 
 
     async def get_measurements(self):
-        print("Getting measurements")
         data = await self.adapter.read_registers(514, 125)
         data2 = await self.adapter.read_registers(514+125, 125)
 
@@ -311,22 +310,6 @@ class DeyeSUN12KEU(BaseInverter):
                 power=pv2_power
             )
         ]
-
-        print("\ntotal")
-        print(total_measurements)
-        print("\ndaily")
-        print(daily_measurements)
-        print("\ngrid")
-        print(grid_measurements)
-
-        print(f" l1 power {grid_measurements.phases[0].power} l2 power {grid_measurements.phases[1].power} l3 power {grid_measurements.phases[2].power}")
-        
-        print("\nload")
-        print(load_measurements)
-        print("\nbattery")
-        print(battery_measurements)
-        print("\npv")
-        print(pv_measurements)
 
         return InverterMeasurements(
             total=total_measurements,

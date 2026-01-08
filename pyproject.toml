@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "pydeye"
-version = "0.0.12"
+version = "0.0.13"
 description = "A Python library for interacting with Deye Inverters using ModbusTCP"
 authors = ["Jakob Salmič <salmic.jakob@gmail.com>"]
 license = "GPL"

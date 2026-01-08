@@ -19,9 +19,6 @@ class ModbusTCP():
         if not self.connected():
             await self.connect()
 
-        print(self.connected())
-
-        print(f"Reading {count} registers at address {register_address}")
         result = await self.client.read_holding_registers(register_address, count=count, device_id=self.unit)
         return result.registers
 

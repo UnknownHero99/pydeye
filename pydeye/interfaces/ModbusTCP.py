@@ -35,7 +35,7 @@ class ModbusTCP():
     async def get_basic_info(self) -> BasicInfo:
         data = await self.read_registers(0, 24)
         mapper = ModbusMapper(data, 0)
-        mapper.dump()
+        # mapper.dump()
 
         protocol_version = f"{mapper.get_value(2):04X}"
         serial_number = "".join([mapper.get_string(register) for register in range(3, 8)])

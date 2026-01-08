@@ -23,7 +23,7 @@ class DeyeSUN12KEU(BaseInverter):
         data2 = await self.adapter.read_registers(514+125, 125)
 
         mapper = ModbusMapper(data+data2, 514)
-        mapper.dump()
+        # mapper.dump()
 
         # 514 daily battery charge uint16 0.1 scale 
         daily_battery_charge_value = round(mapper.get_uint16(514) * 0.1, 1)

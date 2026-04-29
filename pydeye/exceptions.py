@@ -1,6 +1,3 @@
-# Description: Custom exceptions for pyiskra
-
-
 class NotAuthorised(Exception):
     pass
 
@@ -14,8 +11,4 @@ class DeviceConnectionError(Exception):
 
 
 class InvalidResponseCode(Exception):
-    pass
-
-
-class DeviceNotSupported(Exception):
     pass

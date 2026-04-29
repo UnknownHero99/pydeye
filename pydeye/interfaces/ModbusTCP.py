@@ -1,61 +1,50 @@
-from pymodbus.client import AsyncModbusTcpClient
-from pydeye.helper import ModbusMapper, BasicInfo, InverterType
+from __future__ import annotations
 
-class ModbusTCP():
-    def __init__(self, host, port=502, unit=1):
-        self.client = AsyncModbusTcpClient(host=host, port=port, timeout=1)
+from typing import Sequence
+
+from pymodbus.client import AsyncModbusTcpClient
+
+from pydeye.interfaces.base import ModbusInterface
+
+
+class ModbusTCP(ModbusInterface):
+    """Async Modbus TCP adapter (also used as a Modbus TCP-over-serial gateway)."""
+
+    def __init__(self, host: str, port: int = 502, unit: int = 1, timeout: int = 3) -> None:
+        self.client = AsyncModbusTcpClient(host=host, port=port, timeout=timeout)
         self.unit = unit
 
-    async def connect(self):
+    async def connect(self) -> None:
         await self.client.connect()
 
-    async def close(self):
+    async def close(self) -> None:
         self.client.close()
 
-    def connected(self):
+    def connected(self) -> bool:
         return self.client.connected
 
-    async def read_registers(self, register_address, count):
+    # ── New standardised API ─────────────────────────────────────────────────
+
+    async def read_holding_registers(self, start: int, length: int) -> Sequence[int]:
         if not self.connected():
             await self.connect()
-
-        result = await self.client.read_holding_registers(register_address, count=count, device_id=self.unit)
+        result = await self.client.read_holding_registers(start, count=length, device_id=self.unit)
         return result.registers
 
-    async def write_registers(self, register_address, values):
+    async def write_register(self, address: int, value: int) -> bool:
         if not self.connected():
             await self.connect()
+        result = await self.client.write_registers(address, values=[value], device_id=self.unit)
+        return not result.isError()
 
-        result = await self.client.write_registers(register_address, values=values, device_id=self.unit)
-        return result
-    
-    async def get_basic_info(self) -> BasicInfo:
-        data = await self.read_registers(0, 24)
-        mapper = ModbusMapper(data, 0)
-        # mapper.dump()
+    # ── Legacy API kept for backward compatibility ───────────────────────────
 
-        protocol_version = f"{mapper.get_value(2):04X}"
-        serial_number = "".join([mapper.get_string(register) for register in range(3, 8)])
-        type = InverterType.UNDEFINED
-        for inverter_type in InverterType:
-            if inverter_type.value[0] == mapper.get_value(0):
-                type = inverter_type
-                break
+    async def read_registers(self, register_address: int, count: int) -> Sequence[int]:
+        return await self.read_holding_registers(register_address, count)
 
-        rated_power = mapper.get_uint32(20)/10
-        main_version = f"{mapper.get_value(14):04X}-{mapper.get_value(15):04X}-{mapper.get_value(11):04X}"
-        hmi_version= f"{mapper.get_value(17):04X}-{mapper.get_value(18):04X}"
-
-        #data = await self.read_registers(10056, 1)
-        #mapper = ModbusMapper(data, 10056)
-        # mapper.dump()
-
-        return BasicInfo(type, serial_number, main_version, hmi_version, protocol_version, rated_power)
-        
-        
-    
-
-    
-
-
-    
+    async def write_registers(self, register_address: int, values: list[int]):
+        if not self.connected():
+            await self.connect()
+        return await self.client.write_registers(
+            register_address, values=values, device_id=self.unit
+        )

@@ -1,0 +1,10 @@
+{
+  "domain": "pydeye",
+  "name": "Deye Inverter",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "",
+  "iot_class": "local_polling",
+  "requirements": ["pydeye>=0.0.11"],
+  "version": "0.1.0"
+}
